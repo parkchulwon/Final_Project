@@ -1,0 +1,37 @@
+.intro_text {
+	text-align: center;
+	margin-top: 100px;
+	margin-bottom: 20px;
+}
+
+.form-control {
+	width: 350px;
+	text-align: center;
+}
+
+.joinBtn {
+	position: relative;
+	left: 560px;
+	background-color: #325d88;
+	color: seashell;
+	width: 300px;
+	height: 50px;
+	line-height: 50px;
+	text-align: center;
+	cursor: pointer;
+	border-radius: 10px;
+}
+
+.table {
+	width: 70%;
+	margin: auto;
+}
+
+.table>td {
+	position: relative;
+}
+
+#emailCodes {
+	background-color: #325d88;
+	color: seashell;
+}

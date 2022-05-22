@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.menu_Mapper">
+	<select id="menuList" resultType="menu">
+		SELECT
+			menu.*, b.f_savename
+		FROM
+			menu 
+		LEFT JOIN
+			(SELECT * FROM file WHERE group_code = 40) b  ON menu.menu_no = b.idx;
+	</select>
+	
+	<select id="selectMenu" resultType="menu">
+		SELECT
+			*
+		FROM
+			menu 
+		WHERE 
+			menu_no = #{menu_no} 
+			AND 
+			etc = 1
+	</select>
+	
+	<update id="menu_update" useGeneratedKeys="true" keyProperty="menu_no">
+		UPDATE
+			menu
+		SET
+			menu_name = #{menu_name },
+			menu_group = #{menu_group },
+			menu_price = #{menu_price },
+			menu_info = #{menu_info },
+			menu_teg = #{menu_teg }
+		WHERE
+			menu_no = #{menu_no}
+	</update>
+	
+	<update id="menu_delete" useGeneratedKeys="true" keyProperty="menu_no" >
+		UPDATE
+			menu
+		SET
+			etc = 0
+		WHERE
+			menu_no = #{menu_no}
+	</update>
+	
+	<insert id="menu_insert" useGeneratedKeys="true" keyProperty="menu_no"  keyColumn="menu_no" parameterType="menu">
+		INSERT INTO menu (menu_group, menu_name, menu_price, menu_info, menu_teg, etc) 
+		VALUES(#{menu_group}, #{menu_name}, #{menu_price}, #{menu_info}, #{menu_teg}, #{etc})
+	</insert>
+	
+	<insert id="menu_insertFile">
+		<![CDATA[
+			INSERT INTO file (user_no, f_oriname, f_savename, f_length, f_directory, group_code, idx) 
+			VALUES(#{user_no}, #{f_oriname}, #{f_savename}, #{f_length}, #{f_directory}, #{group_code}, #{board_no}) 
+		]]>
+	</insert>
+	
+	
+	<update id="menu_updateFile">
+		<![CDATA[
+			UPDATE 
+				file 
+			SET 
+				user_no = #{user_no}, f_oriname = #{f_oriname}, f_savename = #{f_savename}, f_length = #{f_length}, f_directory = #{f_directory}, 
+				f_update = now() 
+			WHERE 
+				group_code = 40
+				AND
+				idx = #{board_no}
+		]]>
+	</update>
+	
+	<select id="menu_selectFile" resultType="file">
+		SELECT
+			*
+		FROM
+			file
+		WHERE
+			group_code = 40
+			AND
+			idx = #{board_no}
+	</select>
+</mapper>

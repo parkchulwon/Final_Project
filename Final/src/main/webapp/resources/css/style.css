@@ -1,0 +1,47 @@
+.title{
+    margin-top: 100px;
+    text-align: center;
+}
+.loginmenu{
+    border: 1px solid #eaeaea;
+    height: 242px;
+    padding: 30px; 
+}
+.loginbar{
+    position: relative;
+    left:30px; top:20px;
+}
+.form-group{
+    width: 300px;   
+    margin:10px;
+}
+.colorBtn{
+    position: relative;
+    left:350px; bottom:80px;
+    background-color: #325d88;
+    color: seashell;
+    width: 100px;
+    height: 100px;
+    line-height: 100px;
+    text-align: center;
+    cursor:pointer;
+    border-radius: 10px;
+}
+
+.lBtn{
+    background-color: #325d88;
+    color:seashell;
+    width:300px;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 10px;
+}
+.subtitle{
+    text-align: center;
+    position: relative;
+    left:120px; top:20px;
+}
+.
+

@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.main_Mapper">
+	
+	<insert id="info_writeproc">
+		INSERT INTO 
+			info (info_content)
+		VALUES 
+			(#{info_content});
+	</insert>
+	
+	<select id="info_detail" resultType="info">
+		SELECT 
+			 * 
+		FROM 
+			 info 
+		 WHERE 
+		 	info_no = 1;
+	</select>
+	
+	<update id="info_updateproc">
+		UPDATE 
+			info 
+		SET 
+			info_content=#{info_content}
+		WHERE 
+			info_no = 1;
+	</update>
+	
+	<insert id="main_insertFile">
+		<![CDATA[
+			INSERT INTO file (user_no, f_oriname, f_savename, f_length, f_directory, group_code) 
+			VALUES(#{user_no}, #{f_oriname}, #{f_savename}, #{f_length}, #{f_directory}, #{group_code}) 
+		]]>
+	</insert>
+	
+	<select id="nav_list" resultType="nav">
+		SELECT 
+			 * 
+		FROM 
+			 nav
+	</select>
+	
+	<update id="nav_update">
+		UPDATE 
+			 nav
+		SET  
+			nav_available = #{nav_available} 
+		WHERE  
+			nav_no = #{nav_no} 
+	</update>
+	
+		<update id="t_update">
+		UPDATE 
+			nav 
+		SET 
+			nav_title = #{etc} 
+			
+		WHERE 
+			nav_no = #{nav_no};		
+	</update>
+	
+		<update id="e_update">
+		UPDATE 
+			nav  
+		SET 
+			etc = #{etc} 
+			
+		WHERE 
+			nav_no = #{nav_no};		
+	</update>
+	
+	<select id="f_list" resultType="file">
+		SELECT 
+			 * 
+		FROM 
+			 file
+		WHERE 
+			 group_code = 20;
+	</select>
+	
+	<update id="i_update">
+		UPDATE 
+			file
+		SET 
+			f_oriname = #{f_oriname},  
+			f_savename = #{f_savename},  
+			f_length = #{f_length},  
+			f_directory = #{f_directory},  
+			f_update = now()  
+			
+		WHERE 
+			group_code = 20
+		AND 
+			idx = #{idx};		
+	</update>
+	
+	<select id="img_is_null" resultType="int">
+		SELECT  
+			count(*) 
+		FROM 
+			file 
+		WHERE 
+			group_code = 20 
+		AND
+			idx = #{idx};
+	</select>
+	
+	<insert id="i_insert">
+		INSERT INTO 
+			file(f_oriname, f_savename, f_length, f_directory, f_update, group_code, idx) 
+		VALUES (#{f_oriname}, #{f_savename}, #{f_length}, #{f_directory}, now(), 20, #{idx}); 		
+	</insert>
+	
+</mapper>

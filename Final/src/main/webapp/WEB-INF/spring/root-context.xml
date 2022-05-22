@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+    xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
+    xsi:schemaLocation="http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-4.3.xsd
+        http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd">
+	
+	<!-- Root Context: defines shared resources visible to all other web components -->
+     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource" lazy-init="false">
+        <property name="driverClassName" value="com.mysql.cj.jdbc.Driver" />
+        <property name="url" 
+        value="jdbc:mysql://steakehouse.clczrijfcjgq.ap-northeast-2.rds.amazonaws.com:3306/steakehouse?useSSL=false&amp;serverTimezone=UTC&amp;allowPublicKeyRetrieval=true" />
+        <property name="username" value="root" />
+        <property name="password" value="Sh20220202." />
+    </bean>
+    
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"></property>
+		<property name="configLocation" value="classpath:mybatis-config.xml"></property>
+	</bean>
+	
+	<bean id="sqlSessoinTemplate" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory"/>
+	</bean>
+	
+
+	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<property name="host" value="smtp.gmail.com" /> <!-- gmail을 사용 -->
+		<property name="port" value="587" />
+		<property name="username" value="steak.house20220202@gmail.com" />
+		<property name="password" value="sh20220202." />
+		<property name="javaMailProperties">
+			<props>
+				<prop key="mail.smtp.ssl.protocols">TLSv1.2</prop>
+				<prop key="mail.transport.protocol">smtp</prop>
+				<prop key="mail.smtp.auth">true</prop>
+				<prop key="mail.smtp.starttls.enable">true</prop>
+				<prop key="mail.debug">true</prop>
+			</props>
+		</property>
+	</bean>
+</beans>
+

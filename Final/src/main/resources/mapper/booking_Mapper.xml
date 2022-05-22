@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.booking_Mapper">
+	<insert id="insertBooking">
+		INSERT INTO
+			booking (bk_date, bk_time, bk_datetime, bk_name, bk_number, bk_email, 
+			bk_order, bk_update, bk_agreed1, bk_agreed2, bk_agreed3, user_no, etc)
+		VALUE
+			(#{bk_date}, #{bk_time}, #{bk_datetime}, #{bk_name}, #{bk_number}, #{bk_email}, 
+			#{bk_order}, now(), #{bk_agreed1}, #{bk_agreed2}, #{bk_agreed3}, #{user_no}, #{etc})
+	</insert>
+	
+	<select id="bookingTimeSet" resultType="booking">
+		SELECT 
+			bk_time 
+		FROM 
+			booking 
+		WHERE 
+			bk_date = #{bk_date}
+	</select>
+	
+	<select id="countBookingListAll" resultType="Integer">
+        SELECT 
+            count(*) 
+        FROM 
+            booking 
+        WHERE 
+        	bk_agreed1 = 1;
+	</select>
+	<select id="countBookingList" resultType="Integer">
+        SELECT 
+            count(*) 
+        FROM 
+            booking 
+        WHERE 
+        	bk_agreed1 = 1
+        	AND
+        	user_no = #{userno}
+	</select>
+	
+	<select id="listAll" resultType="booking">
+		SELECT 
+			* 
+		FROM  
+			booking 
+		WHERE 
+        	bk_agreed1 = 1
+		ORDER BY 
+			bk_no DESC 
+		LIMIT 
+			#{pageStart}, #{perPageNum}
+	</select>
+	<select id="listUser" resultType="booking">
+		SELECT 
+			* 
+		FROM  
+			booking 
+		WHERE 
+        	bk_agreed1 = 1 AND user_no = #{userno}
+		ORDER BY 
+			bk_no DESC 
+		LIMIT 
+			#{pageStart}, #{perPageNum}
+	</select>
+	
+	<select id="searchCode" resultType="booking">
+		SELECT 
+			* 
+		FROM  
+			booking 
+		WHERE 
+        	etc = #{etc}
+	</select>
+</mapper>

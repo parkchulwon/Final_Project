@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.notice_Mapper">
+	
+	<insert id="notice_write">
+		INSERT INTO 
+			notice (notice_title, notice_content, user_no) 
+		VALUES 
+			(#{notice_title}, #{notice_content}, #{user_no}); 
+	</insert>
+	
+	<insert id="insertFile">
+	<![CDATA[
+		INSERT INTO file (user_no, f_oriname, f_savename, f_length, f_directory, group_code) 
+		VALUES(#{user_no}, #{f_oriname}, #{f_savename}, #{f_length}, #{f_directory}, #{group_code}) 
+	]]>
+	</insert>
+	
+	<select id="countBoardList" resultType="Integer">
+        SELECT 
+            count(*) 
+        FROM 
+            notice 
+        WHERE 
+        	notice_available = 1;
+	</select>
+	
+	<select id="notice_getlist" resultType="notice">
+		SELECT 
+			* 
+		FROM  
+			notice 
+		WHERE 
+        	notice_available = 1 
+		ORDER BY 
+			notice_no DESC 
+		LIMIT 
+			#{pageStart}, #{perPageNum}
+	</select>
+	
+	<select id="notice_detail" resultType="notice">
+		SELECT 
+			 * 
+		FROM 
+			 notice 
+		 WHERE 
+		 	notice_no = #{notice_no};
+	</select>
+	
+	<update id="notices_updateproc">
+		UPDATE 
+			notice 
+		SET 
+			notice_title=#{notice_title}, notice_content=#{notice_content}, notice_update = now() 
+		WHERE 
+			notice_no = #{notice_no};
+	</update>
+	
+	<update id="notices_delete">
+		UPDATE 
+			notice 
+		SET 
+			notice_available = 0, notice_update =now() 
+		WHERE 
+			notice_no = #{notice_no}; 
+	</update>
+	
+	<update id="notice_Update_viewcnt">
+		UPDATE
+			notice
+		SET
+			etc = etc+1
+		WHERE
+			notice_no = #{notice_no}; 
+	</update>
+</mapper>

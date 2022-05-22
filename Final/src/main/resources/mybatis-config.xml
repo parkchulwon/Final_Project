@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<typeAliases>
+		<typeAlias alias="notice" type="com.fred.proj.vo.NoticeVO" />
+		<typeAlias alias="info" type="com.fred.proj.vo.InfoVO" />
+		<typeAlias alias="user" type="com.fred.proj.vo.userVO" />
+		<typeAlias alias="menu" type="com.fred.proj.vo.MenuVO" />
+		<typeAlias alias="nav" type="com.fred.proj.vo.NavVO" />
+		<typeAlias alias="file" type="com.fred.proj.vo.FileVO" />
+		<typeAlias alias="booking" type="com.fred.proj.vo.bkVO" />
+	</typeAliases>
+
+	<mappers>
+		<mapper resource="mapper/notice_Mapper.xml" />
+		<mapper resource="mapper/main_Mapper.xml" />
+		<mapper resource="mapper/menu_Mapper.xml" />
+		<mapper resource="mapper/user_Mapper.xml" />
+		<mapper resource="mapper/booking_Mapper.xml" />
+	</mappers>
+</configuration>

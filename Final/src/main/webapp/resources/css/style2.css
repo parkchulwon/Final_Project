@@ -1,0 +1,29 @@
+.title{
+    margin-top: 100px;
+    text-align: center;
+}
+.loginmenu{
+    border: 1px solid #eaeaea;
+    height: 242px;
+    padding: 30px; 
+}
+.loginbar{
+    position: relative;
+    left:70px; top:-10px;
+}
+.form-group{
+    width: 300px;   
+    margin:10px;
+}
+.lBtn{
+	position: relative;
+    right:-80px;
+    background-color: #e95420;
+    color:seashell;
+    width:300px;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 10px;
+}
